@@ -1,0 +1,108 @@
+/*
+  Design tokens relating to spacing. This is to prevent arbitrary spacing in
+  styling code.
+*/
+
+$spacing: (
+  0: 0rem,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  5: 1.25rem,
+  6: 1.5rem,
+  8: 2rem,
+  10: 2.5rem,
+  12: 3rem,
+  16: 4rem,
+  20: 5rem,
+);
+
+@function space($key) {
+  @return map-get($spacing, $key);
+}
+
+$line-heights: (
+  tight: 1.2,
+  normal: 1.5,
+  relaxed: 1.75,
+);
+
+$breakpoints: (
+  xxs: 320px,
+  xs: 375px,
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1536px,
+);
+
+$container-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+);
+
+@function breakpoint($key) {
+  @return map-get($breakpoints, $key);
+}
+
+$radii: (
+  none: 0,
+  sm: 0.125rem,
+  md: 0.375rem,
+  lg: 0.5rem,
+  full: 9999px,
+);
+
+@function radius($key) {
+  @return map-get($radii, $key);
+}
+
+$shadows: (
+  sm: 0 1px 2px rgba(0, 0, 0, 0.05),
+  md: 0 4px 6px rgba(0, 0, 0, 0.1),
+  lg: 0 10px 15px rgba(0, 0, 0, 0.15),
+);
+
+@function shadow($key) {
+  @return map-get($shadows, $key);
+}
+
+//$z-index: (
+//  dropdown: 1000,
+//  sticky: 1100,
+//  modal: 1200,
+//  toast: 1300,
+//);
+//
+//@function z($key) {
+//  @return map-get($z-index, $key);
+//}
+
+//$font-sizes: (
+//  xs: 0.75rem,
+//  sm: 0.875rem,
+//  base: 1rem,
+//  lg: 1.125rem,
+//  xl: 1.25rem,
+//  2xl: 1.5rem,
+//  3xl: 1.875rem,
+//  4xl: 2.25rem,
+//  5xl: 3rem,
+//);
+//
+//$font-weights: (
+//  light: 300,
+//  normal: 400,
+//  medium: 500,
+//  semibold: 600,
+//  bold: 700,
+//);
+
+//@function font-weight($weight) {
+//  @return map-get($font-weights, $weight);
+//}

@@ -1,0 +1,188 @@
+/*
+  Color theme system intended to be used for all colors in an app. 
+
+  If dynamic theme changes are required, apply-theme() should be used to generate 
+  runtime-available css variables named --theme-[role] (ie --theme-primary). 
+  In user code, all colors should then be refered to by var(--theme-[role])
+  instead of the sass variable in the map directly. Even if dynamic themeing 
+  is not required, it is still recommended to use this method.
+  
+  Theme roles are based on Material Design 3
+  (https://m3.material.io/styles/color/roles)
+
+  Generic representative colors are added for colors required by syntax
+  highlighting.
+*/
+
+@use "colors" as *;
+
+$theme-roles: (
+  "primary",
+  "on-primary",
+  "primary-container",
+  "on-primary-container",
+  "secondary",
+  "on-secondary",
+  "secondary-container",
+  "on-secondary-container",
+  "tertiary",
+  "on-tertiary",
+  "tertiary-container",
+  "on-tertiary-container",
+  "error",
+  "on-error",
+  "error-container",
+  "on-error-container",
+  "surface",
+  "surface-dim",
+  "surface-bright",
+  "surface-container-lowest",
+  "surface-container-low",
+  "surface-container",
+  "surface-container-high",
+  "surface-container-highest",
+  "on-surface",
+  "on-surface-variant",
+  "outline",
+  "outline-variant",
+  "inverse-surface",
+  "inverse-on-surface",
+  "inverse-primary",
+  "scrim",
+  "shadow",
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "teal",
+  "blue",
+  "indigo",
+  "purple",
+  "pink"
+);
+
+$themes: (
+  "default": (
+    "light": (
+      "primary": color("indigo", 700),
+      "on-primary": color("slate", 50),
+      "primary-container": color("indigo", 100),
+      "on-primary-container": color("indigo", 900),
+      "secondary": color("slate", 600),
+      "on-secondary": color("slate", 50),
+      "secondary-container": color("slate", 200),
+      "on-secondary-container": color("slate", 900),
+      "tertiary": color("cyan", 700),
+      "on-tertiary": color("slate", 50),
+      "tertiary-container": color("cyan", 200),
+      "on-tertiary-container": color("cyan", 900),
+      "error": color("rose", 600),
+      "on-error": color("slate", 50),
+      "error-container": color("rose", 100),
+      "on-error-container": color("rose", 900),
+      "surface": color("slate", 50),
+      "surface-dim": color("slate", 100),
+      "surface-bright": color("slate", 50),
+      "surface-container-lowest": color("slate", 50),
+      "surface-container-low": color("slate", 100),
+      "surface-container": color("slate", 200),
+      "surface-container-high": color("slate", 300),
+      "surface-container-highest": color("slate", 400),
+      "on-surface": color("slate", 900),
+      "on-surface-variant": color("slate", 600),
+      "outline": color("slate", 400),
+      "outline-variant": color("slate", 200),
+      "inverse-surface": color("slate", 900),
+      "inverse-on-surface": color("slate", 100),
+      "inverse-primary": color("indigo", 300),
+      "scrim": rgba(0, 0, 0, 0.5),
+      "shadow": rgba(0, 0, 0, 0.2),
+      "red": color("red", 500),
+      "orange": color("orange", 500),
+      "yellow": color("yellow", 500),
+      "green": color("green", 500),
+      "teal": color("teal", 500),
+      "blue": color("blue", 500),
+      "indigo": color("indigo", 500),
+      "purple": color("purple", 500),
+      "pink": color("pink", 500),
+    ),
+    "dark": (
+      "primary": color("indigo", 300),
+      "on-primary": color("slate", 900),
+      "primary-container": color("indigo", 200),
+      "on-primary-container": color("indigo", 900),
+      "secondary": color("slate", 400),
+      "on-secondary": color("slate", 900),
+      "secondary-container": color("slate", 600),
+      "on-secondary-container": color("slate", 50),
+      "tertiary": color("cyan", 400),
+      "on-tertiary": color("slate", 950),
+      "tertiary-container": color("cyan", 600),
+      "on-tertiary-container": color("cyan", 50),
+      "error": color("rose", 500),
+      "on-error": color("slate", 900),
+      "error-container": color("rose", 700),
+      "on-error-container": color("rose", 50),
+      "surface": color("slate", 800),
+      "surface-dim": color("slate", 950),
+      "surface-bright": color("slate", 800),
+      "surface-container-lowest": color("slate", 900),
+      "surface-container-low": color("slate", 800),
+      "surface-container": color("slate", 700),
+      "surface-container-high": color("slate", 600),
+      "surface-container-highest": color("slate", 500),
+      "on-surface": color("slate", 300),
+      "on-surface-variant": color("slate", 400),
+      "outline": color("slate", 600),
+      "outline-variant": color("slate", 700),
+      "inverse-surface": color("slate", 100),
+      "inverse-on-surface": color("slate", 900),
+      "inverse-primary": color("indigo", 200),
+      "scrim": rgba(0, 0, 0, 0.5),
+      "shadow": rgba(0, 0, 0, 0.2),
+      "red": color("red", 300),
+      "orange": color("orange", 300),
+      "yellow": color("amber", 300),
+      "green": color("emerald", 300),
+      "teal": color("blue", 300),
+      "blue": color("sky", 300),
+      "indigo": color("indigo", 300),
+      "purple": color("violet", 300),
+      "pink": color("pink", 300),
+    ),
+  ),
+);
+
+// Convenience accessor for theme values
+@function theme($theme-name, $mode, $role) {
+  @return map-get(map-get(map-get($themes, $theme-name), $mode), $role);
+}
+
+// Generates runtime css variables from the sass theme maps
+@mixin generate-theme-vars($theme-name, $mode) {
+  @each $role in $theme-roles {
+    --theme-#{$role}: #{theme($theme-name, $mode, $role)};
+  }
+}
+
+// Main mixin for applying theme to an app in sass code.
+@mixin apply-theme($theme-name) {
+  :root {
+    @include generate-theme-vars($theme-name, "light");
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      @include generate-theme-vars($theme-name, "dark");
+    }
+  }
+
+  [data-theme="#{$theme-name}-light"] {
+    @include generate-theme-vars($theme-name, "light");
+  }
+
+  [data-theme="#{$theme-name}-dark"] {
+    @include generate-theme-vars($theme-name, "dark");
+  }
+}

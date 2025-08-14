@@ -1,0 +1,48 @@
+// Shared mixins and functions
+@use "tokens" as *;
+@use "sass:math";
+
+@mixin debug-outline($color: rgba(255, 0, 0, 0.3)) {
+  * {
+    outline: 1px solid $color !important;
+  }
+}
+
+@mixin flex-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+// Fluid type value output to rem
+@function fluid-rem($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
+  $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+  $slope-vw: strip-units($slope * 100);
+  $intercept-rems: px-to-rem($min-px - $slope * $min-bp);
+  $min-rems: px-to-rem($min-px);
+  $max-rems: px-to-rem($max-px);
+  @return clamp(
+    #{$min-rems},
+    #{$slope-vw}vw + #{$intercept-rems},
+    #{$max-rems}
+  );
+}
+
+// Fluid type value output to px
+@function fluid-px($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
+  $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+  $slope-vw: strip-units($slope * 100);
+  $intercept: ($min-px - $slope * $min-bp);
+  @return clamp(#{$min-px}, #{$slope-vw}vw + #{$intercept}, #{$max-px});
+}
+
+@function px-to-rem($px) {
+  $rems: math.div($px, 16px) * 1rem;
+  @return $rems;
+}
+
+@function strip-units($number) {
+  @return math.div($number, ($number * 0 + 1));
+}

@@ -1,0 +1,184 @@
+/*
+  Default styling related to typography. 
+  
+  TODO This file needs refactoring to fit into the lib better. 
+*/
+
+@use "./tokens" as *;
+@use "./util" as *;
+
+@use "sass:math";
+@use "sass:list";
+
+$font-serif: "Georgia", "Times New Roman", serif;
+$font-sans: "Helvetica Neue", "Segoe UI", "Roboto", sans-serif;
+$font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+  monospace;
+
+// Alt font stacks (more expressive)
+//$font-serif: "EB Garamond", "Merriweather", serif;
+//$font-sans: "Inter", "Fira Sans", "Helvetica", sans-serif;
+
+code {
+  font-family: $font-mono;
+  line-height: 0;
+}
+
+.prose {
+  // General block spacing
+  > * + * {
+    margin-top: 1.5rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+
+    li + li {
+      margin-top: 0.25rem;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse; // ensures borders collapse into a single border
+    margin-bottom: space(4);
+    background-color: var(--theme-surface-container);
+    border: 1px solid var(--theme-outline); // optional outer border
+  }
+
+  th,
+  td {
+    border: 2px solid var(--theme-outline);
+    padding: space(2);
+    text-align: left;
+  }
+
+  thead {
+    background-color: var(--theme-surface-container-high);
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--theme-surface-container-low);
+  }
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+// Derived from
+// https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/
+@function font-size($size) {
+  $type-base-min: 16px;
+  $type-base-max: 19px;
+  $type-scale-min: 1.2;
+  $type-scale-max: 1.33;
+  $type-steps: (
+    "xs",
+    "sm",
+    "base",
+    "md",
+    "lg",
+    "xl",
+    "2xl",
+    "3xl",
+    "4xl",
+    "5xl"
+  );
+  $type-base-index: list.index($type-steps, "base");
+  $step-index: list.index($type-steps, $size);
+
+  @if $step-index == null {
+    @error "Unknown font size `#{$size}`. Available sizes: #{join($type-steps, ', ')}";
+  }
+
+  $min: $type-base-min *
+    math.pow($type-scale-min, $step-index - $type-base-index);
+  $max: $type-base-max *
+    math.pow($type-scale-max, $step-index - $type-base-index + 1);
+
+  @return fluid-rem($min, $max);
+}
+
+body {
+  font-size: font-size("base");
+  line-height: map-get($line-heights, normal);
+  color: var(--theme-text);
+  font-family: $font-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-serif;
+}
+
+h1 {
+  font-size: font-size("3xl");
+}
+
+h2 {
+  font-size: font-size("2xl");
+}
+
+h3 {
+  font-size: font-size("xl");
+}
+
+h4 {
+  font-size: font-size("lg");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: font-weight(semibold);
+  line-height: map-get($line-heights, tight);
+}
+
+p {
+  line-height: map-get($line-heights, normal);
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+ul,
+ol {
+  margin-bottom: space(3);
+  padding-left: space(5);
+}
+
+hr {
+  color: var(--theme-outline-variant);
+}
