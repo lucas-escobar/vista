@@ -24,9 +24,9 @@
   $min-rems: px-to-rem($min-px);
   $max-rems: px-to-rem($max-px);
   @return clamp(
-    #{$min-rems},
-    #{$slope-vw}vw + #{$intercept-rems},
-    #{$max-rems}
+    #{rnd($min-rems)},
+    #{rnd($slope-vw)}vw + #{rnd($intercept-rems)},
+    #{rnd($max-rems)}
   );
 }
 
@@ -35,7 +35,11 @@
   $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
   $slope-vw: strip-units($slope * 100);
   $intercept: ($min-px - $slope * $min-bp);
-  @return clamp(#{$min-px}, #{$slope-vw}vw + #{$intercept}, #{$max-px});
+  @return clamp(
+    #{rnd($min-px)},
+    #{rnd($slope-vw)}vw + #{rnd($intercept)},
+    #{rnd($max-px)}
+  );
 }
 
 @function px-to-rem($px) {
@@ -45,4 +49,15 @@
 
 @function strip-units($number) {
   @return math.div($number, ($number * 0 + 1));
+}
+
+// FROM https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/
+@function rnd($number, $places: 2) {
+  $n: 1;
+  @if $places > 0 {
+    @for $i from 1 through $places {
+      $n: $n * 10;
+    }
+  }
+  @return math.div(math.round($number * $n), $n);
 }
