@@ -16,29 +16,64 @@
   align-items: center;
 }
 
-// Fluid type value output to rem
 @function fluid-rem($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
   $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
   $slope-vw: strip-units($slope * 100);
   $intercept-rems: px-to-rem($min-px - $slope * $min-bp);
+
   $min-rems: px-to-rem($min-px);
   $max-rems: px-to-rem($max-px);
+
+  // Ensure clamp order is always low → preferred → high
+  $low: if($min-rems < $max-rems, $min-rems, $max-rems);
+  $high: if($min-rems > $max-rems, $min-rems, $max-rems);
+
   @return clamp(
-    #{rnd($min-rems)},
+    #{rnd($low)},
     #{rnd($slope-vw)}vw + #{rnd($intercept-rems)},
-    #{rnd($max-rems)}
+    #{rnd($high)}
   );
 }
 
+// Fluid type value output to rem
+//@function fluid-rem($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
+//  $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+//  $slope-vw: strip-units($slope * 100);
+//  $intercept-rems: px-to-rem($min-px - $slope * $min-bp);
+//  $min-rems: px-to-rem($min-px);
+//  $max-rems: px-to-rem($max-px);
+//  @return clamp(
+//    #{rnd($min-rems)},
+//    #{rnd($slope-vw)}vw + #{rnd($intercept-rems)},
+//    #{rnd($max-rems)}
+//  );
+//}
+
 // Fluid type value output to px
+//@function fluid-px($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
+//  $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+//  $slope-vw: strip-units($slope * 100);
+//  $intercept: ($min-px - $slope * $min-bp);
+//  @return clamp(
+//    #{rnd($min-px)},
+//    #{rnd($slope-vw)}vw + #{rnd($intercept)},
+//    #{rnd($max-px)}
+//  );
+//}
+
 @function fluid-px($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
   $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
   $slope-vw: strip-units($slope * 100);
-  $intercept: ($min-px - $slope * $min-bp);
+  $intercept: $min-px - $slope * $min-bp;
+
+  // Ensure clamp order is always min → preferred → max
+  $low: if($min-px < $max-px, $min-px, $max-px);
+  $high: if($min-px > $max-px, $min-px, $max-px);
+
   @return clamp(
-    #{rnd($min-px)},
+    #{rnd($low)},
     #{rnd($slope-vw)}vw + #{rnd($intercept)},
-    #{rnd($max-px)}
+    #{rnd($high)}
   );
 }
 
