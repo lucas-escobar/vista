@@ -1,0 +1,1261 @@
+/* 
+  Base reference to colors. These colors are typically mapped to functional 
+  theme roles for use in styling. They can be used directly in styling code 
+  but refering to them via themeing is more flexible.
+
+  Colors based on Tailwindcss 4.x
+*/
+
+// Access base color tokens as hex value at compile time
+@function color($family, $shade) {
+  $family-map: map-get($colors, $family);
+  @if $family-map == null {
+    @error "Color family `#{$family}` not found.";
+  }
+  $value: map-get($family-map, $shade);
+  @if $value == null {
+    @error "Shade `#{$shade}` not found in `#{$family}`.";
+  }
+  @return $value;
+}
+
+$colors: (
+  "red": (
+    50: #fef2f2,
+    100: #ffe2e2,
+    200: #ffc9c9,
+    300: #ffa2a2,
+    400: #ff6467,
+    500: #fb2c36,
+    600: #e7000b,
+    700: #c10007,
+    800: #9f0712,
+    900: #82181a,
+    950: #460809,
+  ),
+  "orange": (
+    50: #fff7ed,
+    100: #ffedd4,
+    200: #ffd6a7,
+    300: #ffb86a,
+    400: #ff8904,
+    500: #ff6900,
+    600: #f54900,
+    700: #ca3500,
+    800: #9f2d00,
+    900: #7e2a0c,
+    950: #441306,
+  ),
+  "amber": (
+    50: #fffbeb,
+    100: #fef3c6,
+    200: #fee685,
+    300: #ffd230,
+    400: #ffb900,
+    500: #fe9a00,
+    600: #e17100,
+    700: #bb4d00,
+    800: #973c00,
+    900: #7b3306,
+    950: #461901,
+  ),
+  "yellow": (
+    50: #fefce8,
+    100: #fef9c2,
+    200: #fff085,
+    300: #ffdf20,
+    400: #fdc700,
+    500: #f0b100,
+    600: #d08700,
+    700: #a65f00,
+    800: #894b00,
+    900: #733e0a,
+    950: #432004,
+  ),
+  "lime": (
+    50: #f7fee7,
+    100: #ecfcca,
+    200: #d8f999,
+    300: #bbf451,
+    400: #9ae600,
+    500: #7ccf00,
+    600: #5ea500,
+    700: #497d00,
+    800: #3c6300,
+    900: #35530e,
+    950: #192e03,
+  ),
+  "green": (
+    50: #f0fdf4,
+    100: #dcfce7,
+    200: #b9f8cf,
+    300: #7bf1a8,
+    400: #05df72,
+    500: #00c950,
+    600: #00a63e,
+    700: #008236,
+    800: #016630,
+    900: #0d542b,
+    950: #032e15,
+  ),
+  "emerald": (
+    50: #ecfdf5,
+    100: #d0fae5,
+    200: #a4f4cf,
+    300: #5ee9b5,
+    400: #00d492,
+    500: #00bc7d,
+    600: #009966,
+    700: #007a55,
+    800: #006045,
+    900: #004f3b,
+    950: #002c22,
+  ),
+  "teal": (
+    50: #f0fdfa,
+    100: #cbfbf1,
+    200: #96f7e4,
+    300: #46ecd5,
+    400: #00d5be,
+    500: #00bba7,
+    600: #009689,
+    700: #00786f,
+    800: #005f5a,
+    900: #0b4f4a,
+    950: #022f2e,
+  ),
+  "cyan": (
+    50: #ecfeff,
+    100: #cefafe,
+    200: #a2f4fd,
+    300: #53eafd,
+    400: #00d3f2,
+    500: #00b8db,
+    600: #0092b8,
+    700: #007595,
+    800: #005f78,
+    900: #104e64,
+    950: #053345,
+  ),
+  "sky": (
+    50: #f0f9ff,
+    100: #dff2fe,
+    200: #b8e6fe,
+    300: #74d4ff,
+    400: #00bcff,
+    500: #00a6f4,
+    600: #0084d1,
+    700: #0069a8,
+    800: #00598a,
+    900: #024a70,
+    950: #052f4a,
+  ),
+  "blue": (
+    50: #eff6ff,
+    100: #dbeafe,
+    200: #bedbff,
+    300: #8ec5ff,
+    400: #51a2ff,
+    500: #2b7fff,
+    600: #155dfc,
+    700: #1447e6,
+    800: #193cb8,
+    900: #1c398e,
+    950: #162456,
+  ),
+  "indigo": (
+    50: #eef2ff,
+    100: #e0e7ff,
+    200: #c6d2ff,
+    300: #a3b3ff,
+    400: #7c86ff,
+    500: #615fff,
+    600: #4f39f6,
+    700: #432dd7,
+    800: #372aac,
+    900: #312c85,
+    950: #1e1a4d,
+  ),
+  "violet": (
+    50: #f5f3ff,
+    100: #ede9fe,
+    200: #ddd6ff,
+    300: #c4b4ff,
+    400: #a684ff,
+    500: #8e51ff,
+    600: #7f22fe,
+    700: #7008e7,
+    800: #5d0ec0,
+    900: #4d179a,
+    950: #2f0d68,
+  ),
+  "purple": (
+    50: #faf5ff,
+    100: #f3e8ff,
+    200: #e9d4ff,
+    300: #dab2ff,
+    400: #c27aff,
+    500: #ad46ff,
+    600: #9810fa,
+    700: #8200db,
+    800: #6e11b0,
+    900: #59168b,
+    950: #3c0366,
+  ),
+  "fuchsia": (
+    50: #fdf4ff,
+    100: #fae8ff,
+    200: #f6cfff,
+    300: #f4a8ff,
+    400: #ed6aff,
+    500: #e12afb,
+    600: #c800de,
+    700: #a800b7,
+    800: #8a0194,
+    900: #721378,
+    950: #4b004f,
+  ),
+  "pink": (
+    50: #fdf2f8,
+    100: #fce7f3,
+    200: #fccee8,
+    300: #fda5d5,
+    400: #fb64b6,
+    500: #f6339a,
+    600: #e60076,
+    700: #c6005c,
+    800: #a3004c,
+    900: #861043,
+    950: #510424,
+  ),
+  "rose": (
+    50: #fff1f2,
+    100: #ffe4e6,
+    200: #ffccd3,
+    300: #ffa1ad,
+    400: #ff637e,
+    500: #ff2056,
+    600: #ec003f,
+    700: #c70036,
+    800: #a50036,
+    900: #8b0836,
+    950: #4d0218,
+  ),
+  "slate": (
+    50: #f8fafc,
+    100: #f1f5f9,
+    200: #e2e8f0,
+    300: #cad5e2,
+    400: #90a1b9,
+    500: #62748e,
+    600: #45556c,
+    700: #314158,
+    800: #1d293d,
+    900: #0f172b,
+    950: #020618,
+  ),
+  "gray": (
+    50: #f9fafb,
+    100: #f3f4f6,
+    200: #e5e7eb,
+    300: #d1d5dc,
+    400: #99a1af,
+    500: #6a7282,
+    600: #4a5565,
+    700: #364153,
+    800: #1e2939,
+    900: #101828,
+    950: #030712,
+  ),
+  "zinc": (
+    50: #fafafa,
+    100: #f4f4f5,
+    200: #e4e4e7,
+    300: #d4d4d8,
+    400: #9f9fa9,
+    500: #71717b,
+    600: #52525c,
+    700: #3f3f46,
+    800: #27272a,
+    900: #18181b,
+    950: #09090b,
+  ),
+  "neutral": (
+    50: #fafafa,
+    100: #f5f5f5,
+    200: #e5e5e5,
+    300: #d4d4d4,
+    400: #a1a1a1,
+    500: #737373,
+    600: #525252,
+    700: #404040,
+    800: #262626,
+    900: #171717,
+    950: #0a0a0a,
+  ),
+  "stone": (
+    50: #fafaf9,
+    100: #f5f5f4,
+    200: #e7e5e4,
+    300: #d6d3d1,
+    400: #a6a09b,
+    500: #79716b,
+    600: #57534d,
+    700: #44403b,
+    800: #292524,
+    900: #1c1917,
+    950: #0c0a09,
+  ),
+);
+// Forward all lib content to user
+
+@forward "reset";
+@forward "tokens";
+@forward "typography";
+@forward "colors";
+@forward "themes";
+@forward "syntax-highlighting";
+@forward "util";
+/*  
+  Remove default styling to provide a more predictable and prefered base to
+  work with
+  from https://gist.github.com/Asjas/4b0736108d56197fce0ec9068145b421
+*/
+
+// Box sizing
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Remove default margin
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+// Remove list styles on ul, ol elements with a list role, which suggests
+// default styling will be removed
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+// Set core root defaults
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+// Set core body defaults
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+// A elements that don't have a class get default styles
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+// Make images easier to work with
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+// Inherit fonts for inputs and buttons
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// Remove all animations, transitions and smooth scroll for people that prefer
+// not to see them
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/*
+  Zola uses syntect for syntax highlighting. 
+
+  This file assumes: 
+    1. highlight_theme = "css" in Zola's config.toml.
+    2. A theme has been applied with apply-theme() in user sass code.
+
+  For maintainers: 
+  The z-* variables are generated by syntect. The z-* variables generated can be
+  seen in the files generated by setting the following in config.toml. This is
+  how this file was originally derived.
+
+  highlight_themes_css = [
+    { theme = "base16-ocean-dark", filename = "syntax-theme-dark.css" },
+    { theme = "base16-ocean-light", filename = "syntax-theme-light.css" },
+  ]
+*/
+
+$syntax-fg: var(--theme-on-surface);
+$syntax-bg: var(--theme-surface-container-lowest);
+
+$syntax-comment: var(--theme-on-surface-variant);
+$syntax-operator: var(--theme-on-surface);
+$syntax-variable: var(--theme-on-surface);
+$syntax-keyword: var(--theme-purple);
+$syntax-storage: var(--theme-purple);
+$syntax-function: var(--theme-blue);
+$syntax-support-function: var(--theme-teal);
+$syntax-class: var(--theme-yellow);
+$syntax-meta-class: var(--theme-on-surface);
+$syntax-string: var(--theme-green);
+$syntax-number: var(--theme-orange);
+$syntax-tag: var(--theme-on-surface);
+$syntax-attribute: var(--theme-orange);
+$syntax-attribute-id: var(--theme-blue);
+$syntax-selector: var(--theme-purple);
+$syntax-heading: var(--theme-blue);
+$syntax-unit: var(--theme-orange);
+$syntax-bold: var(--theme-yellow);
+$syntax-italic: var(--theme-purple);
+$syntax-inline-code: var(--theme-green);
+$syntax-link: var(--theme-red);
+$syntax-link-meta: var(--theme-orange);
+$syntax-list: var(--theme-red);
+$syntax-quote: var(--theme-orange);
+$syntax-separator-bg: var(--theme-outline);
+$syntax-inserted: var(--theme-green);
+
+// The following were from the original dark ocean theme. I don't seem to use
+// them but this can be solved later.
+$syntax-deleted: #bf616a;
+$syntax-changed: #b48ead;
+$syntax-ignored: #4f5b66;
+$syntax-untracked: #4f5b66;
+$syntax-color-const: #96b5b4;
+$syntax-regexp: #96b5b4;
+$syntax-escape: #96b5b4;
+$syntax-interpolation: #ab7967;
+$syntax-invalid-bg: #bf616a;
+$syntax-invalid-fg: #2b303b;
+$syntax-git-deleted: #f92672;
+$syntax-git-inserted: #a6e22e;
+$syntax-git-changed: #967efb;
+$syntax-git-ignored: #565656;
+$syntax-git-untracked: #565656;
+
+.z-code {
+  // TODO the code in this block might need to be moved to user sass code
+  // instead of in this lib
+  color: $syntax-fg;
+  background-color: $syntax-bg;
+  font-family: monospace;
+  padding: 0.5rem;
+  margin: 0;
+}
+
+.z-text {
+  background-color: $syntax-bg;
+}
+
+.z-variable.z-parameter.z-function {
+  color: $syntax-fg;
+}
+
+.z-comment,
+.z-punctuation.z-definition.z-comment {
+  color: $syntax-comment;
+}
+
+.z-punctuation.z-definition.z-string,
+.z-punctuation.z-definition.z-variable,
+.z-punctuation.z-definition.z-parameters,
+.z-punctuation.z-definition.z-array {
+  color: $syntax-fg;
+}
+
+.z-none,
+.z-keyword.z-operator {
+  color: $syntax-operator;
+}
+
+.z-keyword {
+  color: $syntax-keyword;
+}
+
+.z-variable {
+  color: $syntax-variable;
+}
+
+.z-entity.z-name.z-function,
+.z-meta.z-require,
+.z-support.z-function.z-any-method {
+  color: $syntax-function;
+}
+
+.z-support.z-class,
+.z-entity.z-name.z-class,
+.z-entity.z-name.z-type.z-class {
+  color: $syntax-class;
+}
+
+.z-meta.z-class {
+  color: $syntax-meta-class;
+}
+
+.z-keyword.z-other.z-special-method {
+  color: $syntax-function;
+}
+
+.z-storage {
+  color: $syntax-storage;
+}
+
+.z-support.z-function {
+  color: $syntax-support-function;
+}
+
+.z-string,
+.z-constant.z-other.z-symbol,
+.z-entity.z-other.z-inherited-class {
+  color: $syntax-string;
+}
+
+.z-constant.z-numeric,
+.z-constant,
+.z-none {
+  color: $syntax-number;
+}
+
+.z-entity.z-name.z-tag {
+  color: $syntax-tag;
+}
+
+.z-entity.z-other.z-attribute-name {
+  color: $syntax-attribute;
+}
+
+.z-entity.z-other.z-attribute-name.z-id,
+.z-punctuation.z-definition.z-entity {
+  color: $syntax-attribute-id;
+}
+
+.z-meta.z-selector {
+  color: $syntax-selector;
+}
+
+.z-markup.z-heading .z-punctuation.z-definition.z-heading,
+.z-entity.z-name.z-section {
+  color: $syntax-heading;
+}
+
+.z-keyword.z-other.z-unit {
+  color: $syntax-unit;
+}
+
+.z-markup.z-bold,
+.z-punctuation.z-definition.z-bold {
+  color: $syntax-bold;
+  font-weight: bold;
+}
+
+.z-markup.z-italic,
+.z-punctuation.z-definition.z-italic {
+  color: $syntax-italic;
+  font-style: italic;
+}
+
+.z-markup.z-raw.z-inline {
+  color: $syntax-inline-code;
+}
+
+.z-string.z-other.z-link {
+  color: $syntax-link;
+}
+
+.z-meta.z-link {
+  color: $syntax-link-meta;
+}
+
+.z-markup.z-list {
+  color: $syntax-list;
+}
+
+.z-markup.z-quote {
+  color: $syntax-quote;
+}
+
+.z-meta.z-separator {
+  color: $syntax-fg;
+  background-color: $syntax-separator-bg;
+}
+
+.z-markup.z-inserted,
+.z-markup.z-inserted.z-git_gutter {
+  color: $syntax-inserted;
+}
+
+.z-markup.z-deleted,
+.z-markup.z-deleted.z-git_gutter {
+  color: $syntax-deleted;
+}
+
+.z-markup.z-changed,
+.z-markup.z-changed.z-git_gutter {
+  color: $syntax-changed;
+}
+
+.z-markup.z-ignored,
+.z-markup.z-ignored.z-git_gutter {
+  color: $syntax-ignored;
+}
+
+.z-markup.z-untracked,
+.z-markup.z-untracked.z-git_gutter {
+  color: $syntax-untracked;
+}
+
+.z-constant.z-other.z-color,
+.z-string.z-regexp,
+.z-constant.z-character.z-escape {
+  color: $syntax-color-const;
+}
+
+.z-punctuation.z-section.z-embedded,
+.z-variable.z-interpolation {
+  color: $syntax-interpolation;
+}
+
+.z-invalid.z-illegal {
+  color: $syntax-invalid-fg;
+  background-color: $syntax-invalid-bg;
+}
+
+.z-markup.z-deleted.z-git_gutter {
+  color: $syntax-git-deleted;
+}
+
+.z-markup.z-inserted.z-git_gutter {
+  color: $syntax-git-inserted;
+}
+
+.z-markup.z-changed.z-git_gutter {
+  color: $syntax-git-changed;
+}
+
+.z-markup.z-ignored.z-git_gutter,
+.z-markup.z-untracked.z-git_gutter {
+  color: $syntax-git-ignored;
+}
+
+// Custom syntax highlighting. Only tested with rust code blocks.
+.z-name {
+  color: var(--theme-yellow);
+}
+.z-support.z-macro {
+  color: var(--theme-red);
+}
+.z-support.z-type {
+  color: var(--theme-orange);
+}
+.z-keyword {
+  color: var(--theme-purple);
+}
+/*
+  Color theme system intended to be used for all colors in an app. 
+
+  If dynamic theme changes are required, apply-theme() should be used to generate 
+  runtime-available css variables named --theme-[role] (ie --theme-primary). 
+  In user code, all colors should then be refered to by var(--theme-[role])
+  instead of the sass variable in the map directly. Even if dynamic themeing 
+  is not required, it is still recommended to use this method.
+  
+  Theme roles are based on Material Design 3
+  (https://m3.material.io/styles/color/roles)
+
+  Generic representative colors are added for colors required by syntax
+  highlighting.
+*/
+
+@use "colors" as *;
+
+$theme-roles: (
+  "primary",
+  "on-primary",
+  "primary-container",
+  "on-primary-container",
+  "secondary",
+  "on-secondary",
+  "secondary-container",
+  "on-secondary-container",
+  "tertiary",
+  "on-tertiary",
+  "tertiary-container",
+  "on-tertiary-container",
+  "error",
+  "on-error",
+  "error-container",
+  "on-error-container",
+  "surface",
+  "surface-dim",
+  "surface-bright",
+  "surface-container-lowest",
+  "surface-container-low",
+  "surface-container",
+  "surface-container-high",
+  "surface-container-highest",
+  "on-surface",
+  "on-surface-variant",
+  "outline",
+  "outline-variant",
+  "inverse-surface",
+  "inverse-on-surface",
+  "inverse-primary",
+  "scrim",
+  "shadow",
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "teal",
+  "blue",
+  "indigo",
+  "purple",
+  "pink"
+);
+
+$themes: (
+  "default": (
+    "light": (
+      "primary": color("indigo", 700),
+      "on-primary": color("slate", 50),
+      "primary-container": color("indigo", 100),
+      "on-primary-container": color("indigo", 900),
+      "secondary": color("slate", 600),
+      "on-secondary": color("slate", 50),
+      "secondary-container": color("slate", 200),
+      "on-secondary-container": color("slate", 900),
+      "tertiary": color("cyan", 700),
+      "on-tertiary": color("slate", 50),
+      "tertiary-container": color("cyan", 200),
+      "on-tertiary-container": color("cyan", 900),
+      "error": color("rose", 600),
+      "on-error": color("slate", 50),
+      "error-container": color("rose", 100),
+      "on-error-container": color("rose", 900),
+      "surface": color("slate", 50),
+      "surface-dim": color("slate", 100),
+      "surface-bright": color("slate", 50),
+      "surface-container-lowest": color("slate", 50),
+      "surface-container-low": color("slate", 100),
+      "surface-container": color("slate", 200),
+      "surface-container-high": color("slate", 300),
+      "surface-container-highest": color("slate", 400),
+      "on-surface": color("slate", 900),
+      "on-surface-variant": color("slate", 600),
+      "outline": color("slate", 400),
+      "outline-variant": color("slate", 200),
+      "inverse-surface": color("slate", 900),
+      "inverse-on-surface": color("slate", 100),
+      "inverse-primary": color("indigo", 300),
+      "scrim": rgba(0, 0, 0, 0.5),
+      "shadow": rgba(0, 0, 0, 0.2),
+      "red": color("red", 500),
+      "orange": color("orange", 500),
+      "yellow": color("yellow", 500),
+      "green": color("green", 500),
+      "teal": color("teal", 500),
+      "blue": color("blue", 500),
+      "indigo": color("indigo", 500),
+      "purple": color("purple", 500),
+      "pink": color("pink", 500),
+    ),
+    "dark": (
+      "primary": color("indigo", 300),
+      "on-primary": color("slate", 900),
+      "primary-container": color("indigo", 200),
+      "on-primary-container": color("indigo", 900),
+      "secondary": color("slate", 400),
+      "on-secondary": color("slate", 900),
+      "secondary-container": color("slate", 600),
+      "on-secondary-container": color("slate", 50),
+      "tertiary": color("cyan", 400),
+      "on-tertiary": color("slate", 950),
+      "tertiary-container": color("cyan", 600),
+      "on-tertiary-container": color("cyan", 50),
+      "error": color("rose", 500),
+      "on-error": color("slate", 900),
+      "error-container": color("rose", 700),
+      "on-error-container": color("rose", 50),
+      "surface": color("slate", 800),
+      "surface-dim": color("slate", 950),
+      "surface-bright": color("slate", 800),
+      "surface-container-lowest": color("slate", 900),
+      "surface-container-low": color("slate", 800),
+      "surface-container": color("slate", 700),
+      "surface-container-high": color("slate", 600),
+      "surface-container-highest": color("slate", 500),
+      "on-surface": color("slate", 300),
+      "on-surface-variant": color("slate", 400),
+      "outline": color("slate", 600),
+      "outline-variant": color("slate", 700),
+      "inverse-surface": color("slate", 100),
+      "inverse-on-surface": color("slate", 900),
+      "inverse-primary": color("indigo", 200),
+      "scrim": rgba(0, 0, 0, 0.5),
+      "shadow": rgba(0, 0, 0, 0.2),
+      "red": color("red", 300),
+      "orange": color("orange", 300),
+      "yellow": color("amber", 300),
+      "green": color("emerald", 300),
+      "teal": color("blue", 300),
+      "blue": color("sky", 300),
+      "indigo": color("indigo", 300),
+      "purple": color("violet", 300),
+      "pink": color("pink", 300),
+    ),
+  ),
+);
+
+// Convenience accessor for theme values
+@function theme($theme-name, $mode, $role) {
+  @return map-get(map-get(map-get($themes, $theme-name), $mode), $role);
+}
+
+// Generates runtime css variables from the sass theme maps
+@mixin generate-theme-vars($theme-name, $mode) {
+  @each $role in $theme-roles {
+    --theme-#{$role}: #{theme($theme-name, $mode, $role)};
+  }
+}
+
+// Main mixin for applying theme to an app in sass code.
+@mixin apply-theme($theme-name) {
+  :root {
+    @include generate-theme-vars($theme-name, "light");
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      @include generate-theme-vars($theme-name, "dark");
+    }
+  }
+
+  [data-theme="#{$theme-name}-light"] {
+    @include generate-theme-vars($theme-name, "light");
+  }
+
+  [data-theme="#{$theme-name}-dark"] {
+    @include generate-theme-vars($theme-name, "dark");
+  }
+}
+/*
+  Design tokens relating to spacing. This is to prevent arbitrary spacing in
+  styling code.
+*/
+
+$spacing: (
+  0: 0rem,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  5: 1.25rem,
+  6: 1.5rem,
+  8: 2rem,
+  10: 2.5rem,
+  12: 3rem,
+  16: 4rem,
+  20: 5rem,
+);
+
+@function space($key) {
+  @return map-get($spacing, $key);
+}
+
+$line-heights: (
+  tight: 1.2,
+  normal: 1.5,
+  relaxed: 1.75,
+);
+
+$breakpoints: (
+  xxs: 320px,
+  xs: 375px,
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1536px,
+);
+
+$container-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+);
+
+@function breakpoint($key) {
+  @return map-get($breakpoints, $key);
+}
+
+$radii: (
+  none: 0,
+  sm: 0.125rem,
+  md: 0.375rem,
+  lg: 0.5rem,
+  full: 9999px,
+);
+
+@function radius($key) {
+  @return map-get($radii, $key);
+}
+
+$shadows: (
+  sm: 0 1px 2px rgba(0, 0, 0, 0.05),
+  md: 0 4px 6px rgba(0, 0, 0, 0.1),
+  lg: 0 10px 15px rgba(0, 0, 0, 0.15),
+);
+
+@function shadow($key) {
+  @return map-get($shadows, $key);
+}
+
+//$z-index: (
+//  dropdown: 1000,
+//  sticky: 1100,
+//  modal: 1200,
+//  toast: 1300,
+//);
+//
+//@function z($key) {
+//  @return map-get($z-index, $key);
+//}
+
+//$font-sizes: (
+//  xs: 0.75rem,
+//  sm: 0.875rem,
+//  base: 1rem,
+//  lg: 1.125rem,
+//  xl: 1.25rem,
+//  2xl: 1.5rem,
+//  3xl: 1.875rem,
+//  4xl: 2.25rem,
+//  5xl: 3rem,
+//);
+//
+//$font-weights: (
+//  light: 300,
+//  normal: 400,
+//  medium: 500,
+//  semibold: 600,
+//  bold: 700,
+//);
+
+//@function font-weight($weight) {
+//  @return map-get($font-weights, $weight);
+//}
+/*
+  Default styling related to typography. 
+  
+  TODO This file needs refactoring to fit into the lib better. 
+*/
+
+@use "./tokens" as *;
+@use "./util" as *;
+
+@use "sass:math";
+@use "sass:list";
+
+$font-serif: "Georgia", "Times New Roman", serif;
+$font-sans: "Helvetica Neue", "Segoe UI", "Roboto", sans-serif;
+$font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+  monospace;
+
+// Alt font stacks (more expressive)
+//$font-serif: "EB Garamond", "Merriweather", serif;
+//$font-sans: "Inter", "Fira Sans", "Helvetica", sans-serif;
+
+code {
+  font-family: $font-mono;
+  line-height: 0;
+}
+
+.prose {
+  // General block spacing
+  > * + * {
+    margin-top: 1.5rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+
+    li + li {
+      margin-top: 0.25rem;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse; // ensures borders collapse into a single border
+    margin-bottom: space(4);
+    background-color: var(--theme-surface-container);
+    border: 1px solid var(--theme-outline); // optional outer border
+  }
+
+  th,
+  td {
+    border: 2px solid var(--theme-outline);
+    padding: space(2);
+    text-align: left;
+  }
+
+  thead {
+    background-color: var(--theme-surface-container-high);
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--theme-surface-container-low);
+  }
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+// Derived from
+// https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/
+@function font-size($size) {
+  $type-base-min: 16px;
+  $type-base-max: 19px;
+  $type-scale-min: 1.2;
+  $type-scale-max: 1.33;
+  $type-steps: (
+    "xs",
+    "sm",
+    "base",
+    "md",
+    "lg",
+    "xl",
+    "2xl",
+    "3xl",
+    "4xl",
+    "5xl"
+  );
+  $type-base-index: list.index($type-steps, "base");
+  $step-index: list.index($type-steps, $size);
+
+  @if $step-index == null {
+    @error "Unknown font size `#{$size}`. Available sizes: #{join($type-steps, ', ')}";
+  }
+
+  $min: $type-base-min *
+    math.pow($type-scale-min, $step-index - $type-base-index);
+  $max: $type-base-max *
+    math.pow($type-scale-max, $step-index - $type-base-index + 1);
+
+  @return fluid-rem($min, $max);
+}
+
+body {
+  font-size: font-size("base");
+  line-height: map-get($line-heights, normal);
+  color: var(--theme-text);
+  font-family: $font-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-serif;
+}
+
+h1 {
+  font-size: font-size("3xl");
+}
+
+h2 {
+  font-size: font-size("2xl");
+}
+
+h3 {
+  font-size: font-size("xl");
+}
+
+h4 {
+  font-size: font-size("lg");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: font-weight(semibold);
+  line-height: map-get($line-heights, tight);
+}
+
+p {
+  line-height: map-get($line-heights, normal);
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+ul,
+ol {
+  margin-bottom: space(3);
+  padding-left: space(5);
+}
+
+hr {
+  color: var(--theme-outline-variant);
+}
+// Shared mixins and functions
+@use "tokens" as *;
+@use "sass:math";
+
+@mixin debug-outline($color: rgba(255, 0, 0, 0.3)) {
+  * {
+    outline: 1px solid $color !important;
+  }
+}
+
+@mixin flex-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@function fluid-rem($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
+  $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+  $slope-vw: strip-units($slope * 100);
+  $intercept-rems: px-to-rem($min-px - $slope * $min-bp);
+
+  $min-rems: px-to-rem($min-px);
+  $max-rems: px-to-rem($max-px);
+
+  // Ensure clamp order is always low → preferred → high
+  $low: if($min-rems < $max-rems, $min-rems, $max-rems);
+  $high: if($min-rems > $max-rems, $min-rems, $max-rems);
+
+  @return clamp(
+    #{rnd($low)},
+    #{rnd($slope-vw)}vw + #{rnd($intercept-rems)},
+    #{rnd($high)}
+  );
+}
+
+// Fluid type value output to rem
+//@function fluid-rem($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
+//  $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+//  $slope-vw: strip-units($slope * 100);
+//  $intercept-rems: px-to-rem($min-px - $slope * $min-bp);
+//  $min-rems: px-to-rem($min-px);
+//  $max-rems: px-to-rem($max-px);
+//  @return clamp(
+//    #{rnd($min-rems)},
+//    #{rnd($slope-vw)}vw + #{rnd($intercept-rems)},
+//    #{rnd($max-rems)}
+//  );
+//}
+
+// Fluid type value output to px
+//@function fluid-px($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
+//  $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+//  $slope-vw: strip-units($slope * 100);
+//  $intercept: ($min-px - $slope * $min-bp);
+//  @return clamp(
+//    #{rnd($min-px)},
+//    #{rnd($slope-vw)}vw + #{rnd($intercept)},
+//    #{rnd($max-px)}
+//  );
+//}
+
+@function fluid-px($min-px, $max-px, $min-bp: 320, $max-bp: 1280) {
+  $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+  $slope-vw: strip-units($slope * 100);
+  $intercept: $min-px - $slope * $min-bp;
+
+  // Ensure clamp order is always min → preferred → max
+  $low: if($min-px < $max-px, $min-px, $max-px);
+  $high: if($min-px > $max-px, $min-px, $max-px);
+
+  @return clamp(
+    #{rnd($low)},
+    #{rnd($slope-vw)}vw + #{rnd($intercept)},
+    #{rnd($high)}
+  );
+}
+
+@function px-to-rem($px) {
+  $rems: math.div($px, 16px) * 1rem;
+  @return $rems;
+}
+
+@function strip-units($number) {
+  @return math.div($number, ($number * 0 + 1));
+}
+
+// FROM https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/
+@function rnd($number, $places: 2) {
+  $n: 1;
+  @if $places > 0 {
+    @for $i from 1 through $places {
+      $n: $n * 10;
+    }
+  }
+  @return math.div(math.round($number * $n), $n);
+}
